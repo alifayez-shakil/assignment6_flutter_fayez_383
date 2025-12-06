@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:demo_project/profilepage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,16 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Homepage"),
-        backgroundColor: Colors.blueGrey,
-        leading: Icon(Icons.home),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.person)),
-        ],
-      ),
-
+      appBar: AppBar(title: Text("HomePage"), backgroundColor: Colors.blueGrey),
       endDrawer: NavigationDrawer(
         children: [
           DrawerHeader(
@@ -38,53 +30,56 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-
-      floatingActionButton: AnimatedSwitcher(
-        duration: Duration(milliseconds: 300),
-        child: FloatingActionButton(
-          key: ValueKey(1),
-          onPressed: () {},
-          backgroundColor: Colors.blueGrey,
-          foregroundColor: Colors.white,
-          shape: CircleBorder(),
-          child: Icon(Icons.add, size: 30),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.blueGrey,
+        foregroundColor: Colors.white,
+        shape: CircleBorder(),
+        child: Icon(Icons.add),
       ),
-
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(255, 38, 56, 49),
-              Colors.blueGrey.shade500,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+      body: Column(
+        children: [
+          Image.asset("assets/images/flutter.png", height: 200, width: 200),
+          Text(
+            "Flutter Project",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.blueGrey,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Row(
             children: [
-              Text(
-                "Hi!! I am Fayez Ali Shakil",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 28,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 4,
-                      color: Colors.black45,
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ProfilePage();
+                        },
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.brown,
+                    foregroundColor: Colors.white,
+                    fixedSize: Size(150, 40),
+                  ),
+                  child: Text("Profile Page"),
                 ),
               ),
+              ElevatedButton(onPressed: () {}, child: Text("About")),
+              SizedBox(width: 20),
+              OutlinedButton(onPressed: () {}, child: Text("More Options")),
+              TextButton(onPressed: () {}, child: Text("Exit")),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
